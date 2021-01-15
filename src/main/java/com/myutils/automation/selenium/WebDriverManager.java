@@ -198,7 +198,7 @@ public class WebDriverManager
         ffOptions.addPreference("acceptInsecureCerts", true);
         ffOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
 
-        ffOptions.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
+        //ffOptions.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
 
         return ffOptions;
     }
