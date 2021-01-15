@@ -122,7 +122,7 @@ public class ReportUtil
         }
 
         //Return the absolute path of the file for the html file to display correctly
-        return "../../" + path;
+        return "../../../" + path;
     }
 
 }
