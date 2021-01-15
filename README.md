@@ -14,3 +14,5 @@ How to run:
 	+ Windows: chrome (default), firefox, ie
 	+ Mac: chrome, firefox
  - Default local driver path <runtime>: <working folder>\seleniumdrivers
+ - Data files are put under <working folder>\Data with name convention: OW_<test name>_Data.csv
+ - To run on Saucelabs, please use more params: -DsaucelabUser=<username>, -DsaucelabAccessKey=<access key>
