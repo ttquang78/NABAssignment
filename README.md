@@ -13,7 +13,7 @@ How to run:
  - Valid values of [browser]: 
 	+ Windows: chrome (default), firefox, ie
 	+ Mac: chrome (default), firefox
- - Default local driver path [runtime]: [working folder]\seleniumdrivers
- - Data files are put under [working folder]\Data with name convention: OW_[test name]_Data.csv
+ - Default local driver path [runtime]: [working folder]/seleniumdrivers
+ - Data files are put under [working folder]/Data with name convention: OW_[test name]_Data.csv
  - To run on Saucelabs, please use more params: -DsaucelabUser=[username], -DsaucelabAccessKey=[access key]
- - Report is under: [working folder]\target\surefire-reports\html\index.html
+ - Report is under: [working folder]/target/surefire-reports/html/index.html

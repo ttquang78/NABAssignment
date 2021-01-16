@@ -7,29 +7,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-public class SelCmd
-{
+public class SelCmd {
     private static Logger log = Logger.getLogger(SelCmd.class.getName());
 
-    public enum SelCommand
-    {
+    public enum SelCommand {
         CLICK, SENDKEY, GOTO, SELECT, SCROLL_TO_ELEMENT,
         GET_TEXT, GET_ATTRIBUTE,
         WAIT_ELEMENT_PRESENCE
 
     }
 
-    public static void performAction(WebDriver driver, SelCommand cmd, WebElement element, String value)
-    {
+    public static void performAction(WebDriver driver, SelCommand cmd, WebElement element, String value) {
         log.info("Perform action: " + cmd.toString());
         int retryCmd = 2;
         String errorMsg = "";
-        while (retryCmd > 0)
-        {
-            try
-            {
-                switch (cmd)
-                {
+        while (retryCmd > 0) {
+            try {
+                switch (cmd) {
                     case CLICK:
                         SelAction.clickElement(driver, element);
                         break;
@@ -50,32 +44,25 @@ public class SelCmd
                         break;
                 }
                 break;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 retryCmd--;
                 errorMsg = e.toString();
             }
         }
 
-        if (!errorMsg.isEmpty())
-        {
+        if (!errorMsg.isEmpty()) {
             ReportUtil.logError(WebDriverManager.get(), "Unexpected Error");
             Assert.fail(errorMsg);
         }
     }
 
-    public static void performActionOnBy(WebDriver driver, SelCommand cmd, By element, String value)
-    {
+    public static void performActionOnBy(WebDriver driver, SelCommand cmd, By element, String value) {
         log.info("Perform action: " + cmd.toString());
         int retryCmd = 2;
         String errorMsg = "";
-        while (retryCmd > 0)
-        {
-            try
-            {
-                switch (cmd)
-                {
+        while (retryCmd > 0) {
+            try {
+                switch (cmd) {
                     case CLICK:
                         SelAction.clickElement(driver, element);
                         break;
@@ -87,33 +74,26 @@ public class SelCmd
                         break;
                 }
                 break;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 retryCmd--;
                 errorMsg = e.toString();
             }
         }
 
-        if (!errorMsg.isEmpty())
-        {
+        if (!errorMsg.isEmpty()) {
             ReportUtil.logError(WebDriverManager.get(), "Unexpected Error");
             Assert.fail(errorMsg);
         }
     }
 
-    public static String performExtract(WebDriver driver, SelCommand cmd, WebElement element, String value)
-    {
+    public static String performExtract(WebDriver driver, SelCommand cmd, WebElement element, String value) {
         log.info("Perform action: " + cmd.toString());
         int retryCmd = 2;
         String errorMsg = "";
         String strReturn = "";
-        while (retryCmd > 0)
-        {
-            try
-            {
-                switch (cmd)
-                {
+        while (retryCmd > 0) {
+            try {
+                switch (cmd) {
                     case GET_ATTRIBUTE:
                         strReturn = SelBase.getAttribute(driver, element, value);
                         break;
@@ -125,16 +105,13 @@ public class SelCmd
                         break;
                 }
                 break;
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 retryCmd--;
                 errorMsg = e.toString();
             }
         }
 
-        if (!errorMsg.isEmpty())
-        {
+        if (!errorMsg.isEmpty()) {
             ReportUtil.logError(WebDriverManager.get(), "Unexpected Error");
             Assert.fail(errorMsg);
         }

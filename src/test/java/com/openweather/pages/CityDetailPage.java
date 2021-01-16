@@ -25,22 +25,18 @@ public class CityDetailPage {
     @FindBy(css = "div.daily-detail-container")
     private WebElement divDailyDetail;
 
-    public boolean is8dayForecastDisplay()
-    {
+    public boolean is8dayForecastDisplay() {
         return SelBase.isElementVisibility(driver, div8days);
     }
 
-    public boolean isDailyDetailPanelDisplay()
-    {
+    public boolean isDailyDetailPanelDisplay() {
         return SelBase.isElementVisibility(driver, divDailyDetail);
     }
 
-    public boolean isForecastOfDayDisplay(int day)
-    {
+    public boolean isForecastOfDayDisplay(int day) {
         boolean isTrue = false;
 
-        if (day <= 8)
-        {
+        if (day <= 8) {
             String xpath = generateXPathOfForecast(day);
             isTrue = SelBase.isVisibilityOfElementLocated(driver, By.xpath(xpath));
         }
@@ -48,10 +44,8 @@ public class CityDetailPage {
         return isTrue;
     }
 
-    public void expandForecastOfDate(int day)
-    {
-        if (isForecastOfDayDisplay(day))
-        {
+    public void expandForecastOfDate(int day) {
+        if (isForecastOfDayDisplay(day)) {
             ReportUtil.logStep("Expand date # " + day + " from current date");
 
             String xpath = generateXPathOfForecast(day);
@@ -59,8 +53,7 @@ public class CityDetailPage {
         }
     }
 
-    private String generateXPathOfForecast(int day)
-    {
+    private String generateXPathOfForecast(int day) {
         Date objDate = DateUtils.addDays(new Date(), day);
         String strDateFormat = "E, MMM d";
         SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);

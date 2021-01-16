@@ -9,26 +9,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
-public class CsvUtils
-{
+public class CsvUtils {
     private static final Logger log = Logger.getLogger(CsvUtils.class.getName());
 
-    private CsvUtils()
-    {}
+    private CsvUtils() {
+    }
 
-    public static List<String[]> importCsv(String accFilePath) throws IOException
-    {
+    public static List<String[]> importCsv(String accFilePath) throws IOException {
         List<String[]> csvImport;
 
-        try (InputStream csvFilePath = new FileInputStream(accFilePath))
-        {
+        try (InputStream csvFilePath = new FileInputStream(accFilePath)) {
             CSVReader reader;
             reader = new CSVReader(new InputStreamReader(csvFilePath));
             csvImport = reader.readAll();
             reader.close();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             log.error(e.getMessage());
             throw e;
         }

@@ -18,8 +18,7 @@ public class HeaderPage {
     @FindBy(id = "q")
     private WebElement txtSearch;
 
-    public void searchCity(String searchStr)
-    {
+    public void searchCity(String searchStr) {
         ReportUtil.logStep("Search city with: " + searchStr);
 
         txtSearch.sendKeys(searchStr);

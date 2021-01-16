@@ -23,35 +23,27 @@ public class SearchResultPage {
     @FindBy(xpath = "//div[@id='forecast_list_ul']/table")
     private WebElement tableResult;
 
-    public boolean isNotFoundDisplay()
-    {
+    public boolean isNotFoundDisplay() {
         return SelBase.isElementVisibility(driver, lblNotFound);
     }
 
-    public int countResult()
-    {
+    public int countResult() {
         int count = 0;
 
-        if (SelBase.isElementVisibility(driver, tableResult))
-        {
+        if (SelBase.isElementVisibility(driver, tableResult)) {
             count = tableResult.findElements(By.tagName("tr")).size();
         }
 
         return count;
     }
 
-    public boolean isCorrectResult(String expectStr)
-    {
+    public boolean isCorrectResult(String expectStr) {
         boolean isCorrect = false;
 
-        if (expectStr.equalsIgnoreCase("not found"))
-        {
+        if (expectStr.equalsIgnoreCase("not found")) {
             isCorrect = isNotFoundDisplay();
-        }
-        else
-        {
-            if (countResult() > 0)
-            {
+        } else {
+            if (countResult() > 0) {
                 isCorrect = true;
             }
         }
@@ -59,8 +51,7 @@ public class SearchResultPage {
         return isCorrect;
     }
 
-    public void clickSearchResultNumber(int index)
-    {
+    public void clickSearchResultNumber(int index) {
         ReportUtil.logStep("Select result #" + index);
 
         String xpath = xpathForecastList + "//tr[" + index + "]//a";

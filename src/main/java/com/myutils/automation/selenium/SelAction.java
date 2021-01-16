@@ -9,52 +9,42 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-public class SelAction extends SelBase
-{
+public class SelAction extends SelBase {
     private static Logger log = Logger.getLogger(SelAction.class.getName());
 
-    private SelAction()
-    {}
+    private SelAction() {
+    }
 
-    static void clickElement(WebDriver driver, WebElement element)
-    {
+    static void clickElement(WebDriver driver, WebElement element) {
         waitForElementClickable(driver, element);
 
         log.info("Trying to click element " + element + "] ...");
-        if (Setup.browserName == CustomData.BrowserName.IE)
-        {
-            JavascriptExecutor executor = (JavascriptExecutor)driver;
+        if (Setup.browserName == CustomData.BrowserName.IE) {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
-        }
-        else
-        {
+        } else {
             element.click();
         }
         log.info("Clicked element " + element + "]");
     }
 
-    static void clickElement(WebDriver driver, By by)
-    {
+    static void clickElement(WebDriver driver, By by) {
         waitForElementPresence(driver, by);
         WebElement element = driver.findElement(by);
 
         waitForElementClickable(driver, element);
 
         log.info("Trying to click element " + element + "] ...");
-        if (Setup.browserName == CustomData.BrowserName.IE)
-        {
-            JavascriptExecutor executor = (JavascriptExecutor)driver;
+        if (Setup.browserName == CustomData.BrowserName.IE) {
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
             executor.executeScript("arguments[0].click();", element);
-        }
-        else
-        {
+        } else {
             element.click();
         }
         log.info("Clicked element " + element + "]");
     }
 
-    public static void selectCategory(WebDriver driver, WebElement lstCategory, String option)
-    {
+    public static void selectCategory(WebDriver driver, WebElement lstCategory, String option) {
         waitForElementVisibility(driver, lstCategory);
 
         log.info("Trying to select option from  [" + lstCategory + "] ...");
@@ -63,8 +53,7 @@ public class SelAction extends SelBase
         log.info("Selected [" + option + "] from element " + lstCategory + "]");
     }
 
-    static void sendKeysToElement(WebDriver driver, WebElement element, String value)
-    {
+    static void sendKeysToElement(WebDriver driver, WebElement element, String value) {
         waitForElementVisibility(driver, element);
 
         log.info("Trying to send keys to element [" + element + "] ...");
@@ -81,8 +70,7 @@ public class SelAction extends SelBase
         log.info("Sent [" + value + "] to element " + element + "]");
     }
 
-    public static void scrollToElement(WebDriver driver, WebElement element)
-    {
+    public static void scrollToElement(WebDriver driver, WebElement element) {
         waitForElementVisibility(driver, element);
 
         log.info("Trying to scroll to [" + element + "] ...");

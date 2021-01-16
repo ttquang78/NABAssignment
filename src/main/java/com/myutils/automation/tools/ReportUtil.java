@@ -11,14 +11,13 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ReportUtil
-{
+public class ReportUtil {
     public static String screenshotPath;  //Specified within Setup
 
-    private ReportUtil() {}
+    private ReportUtil() {
+    }
 
-    public static void initReportNG()
-    {
+    public static void initReportNG() {
         // Set SCREENSHOTS folder path (take/save capture when failure occurs):
         screenshotPath = "target/Screenshots/";
 
@@ -36,8 +35,7 @@ public class ReportUtil
      * /*- Collapse function for html report (+/- to show hide the test case stestps)
      * /*-------------------------------------------------
      */
-    public static void startCollapseHtml(String name)
-    {
+    public static void startCollapseHtml(String name) {
         Reporter.log("<details>");
         Reporter.log("<summary class='heading'>" + name + "</summary>");
     }
@@ -47,8 +45,7 @@ public class ReportUtil
      * /*- Close the fnal DIV of the test case steps loging
      * /*-------------------------------------------------
      */
-    public static void endCollapseHtml()
-    {
+    public static void endCollapseHtml() {
         Reporter.log("<br></details>");
     }
 
@@ -57,13 +54,11 @@ public class ReportUtil
      * /*- Log the step of a test case
      * /*-------------------------------------------------
      */
-    public static void logStep(String step)
-    {
+    public static void logStep(String step) {
         Reporter.log("<br><h4>&raquo; " + step + "</h4>");
     }
 
-    public static void logSubStep(String step)
-    {
+    public static void logSubStep(String step) {
         Reporter.log("<br>- " + step + "<br>");
     }
 
@@ -73,16 +68,14 @@ public class ReportUtil
      * /*- whenever an exception occurs (throwable) and is not caught by any of the SelUtil functions
      * //------------------------------------------------------------------------
      */
-    public static void logExceptionError(WebDriver driver, String msg)
-    {
+    public static void logExceptionError(WebDriver driver, String msg) {
         String screenshotLink =
                 " - <font color='red'>Exception Failure:</font>  <a href=" + captureScreen(
                         driver) + " target='_blank'>" + "[View Screenshot] </a> -- " + msg + "<br>";
         Reporter.log(screenshotLink);
     }
 
-    public static void logError(WebDriver driver, String msg)
-    {
+    public static void logError(WebDriver driver, String msg) {
         Reporter.log(" - " + msg);
         String screenshotLink =
                 " - <b><font color='red'>FAIL:</font></b>  <a href=" + captureScreen(
@@ -96,28 +89,21 @@ public class ReportUtil
      * /*- Filename as date and timestamp
      * /*---------------------------------------------------------------------
      */
-    private static synchronized String captureScreen(WebDriver driver, String... appName)
-    {
+    private static synchronized String captureScreen(WebDriver driver, String... appName) {
         String path;
 
-        try
-        {
+        try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("MMMdd(HH-mm-ss)");
             String dateString = dateFormat.format(Calendar.getInstance().getTime());
-            if (appName.length > 0)
-            {
+            if (appName.length > 0) {
                 path = screenshotPath + appName[0] + ".png";
-            }
-            else
-            {
+            } else {
                 path = screenshotPath + dateString + ".png";
             }
 
-            File source = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(source, new File(path));
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             path = "Failed_To_Capture_Screenshot:_" + e.getMessage();
         }
 

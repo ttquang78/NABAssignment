@@ -17,9 +17,9 @@ import org.testng.annotations.Test;
 
 import java.lang.reflect.Method;
 
-public class AssignmentSuite  extends TestBase {
+public class AssignmentSuite extends TestBase {
     @Test(dataProviderClass = DataProviderCenter.class, dataProvider = "LoadData")
-    public void OW_SearchCityWeather(Method method, TestData data) {
+    public void OW_TC01_SearchCityWeather(Method method, TestData data) {
         ReportUtil.startCollapseHtml(method.getName());
 
         //Init driver and pages for testing
@@ -43,7 +43,7 @@ public class AssignmentSuite  extends TestBase {
     }
 
     @Test(dataProviderClass = DataProviderCenter.class, dataProvider = "LoadData")
-    public void OW_ViewForecastWeatherOfDay(Method method, TestData data) {
+    public void OW_TC02_ViewForecastWeatherOfDay(Method method, TestData data) {
         ReportUtil.startCollapseHtml(method.getName());
 
         //Init driver and pages for testing

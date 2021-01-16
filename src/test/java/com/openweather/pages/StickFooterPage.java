@@ -20,10 +20,8 @@ public class StickFooterPage {
     @FindBy(css = "div.owm-loader")
     private WebElement divLoader;
 
-    public void clickAllowAll()
-    {
-        if (SelBase.isElementVisibility(driver, btnAllowAll))
-        {
+    public void clickAllowAll() {
+        if (SelBase.isElementVisibility(driver, btnAllowAll)) {
             ReportUtil.logStep("Allow all cookies");
             SelBase.waitWithReason(5, "wait loading");
             SelCmd.performAction(driver, SelCmd.SelCommand.CLICK, btnAllowAll, null);

@@ -21,9 +21,9 @@ import org.testng.Assert;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class WebDriverManager
-{
-    private WebDriverManager() {}
+public class WebDriverManager {
+    private WebDriverManager() {
+    }
 
     // WebDriver as localthread
     private static final ThreadLocal<EventFiringWebDriver> webDriver = new ThreadLocal<>();
@@ -37,13 +37,11 @@ public class WebDriverManager
      * /*- Sets a new Error Buffer
      * /*------------------------------------------------------
      */
-    public static synchronized void setErrorBuffer()
-    {
+    public static synchronized void setErrorBuffer() {
         errorBuffer.set(new StringBuffer());
     }
 
-    public static synchronized void setErrorBuffer(String errorStr)
-    {
+    public static synchronized void setErrorBuffer(String errorStr) {
         errorBuffer.set(new StringBuffer(errorStr));
     }
 
@@ -52,40 +50,32 @@ public class WebDriverManager
      * /*- Returns the Error Buffer
      * /*------------------------------------------------------
      */
-    public static synchronized StringBuilder getErrorBuffer()
-    {
+    public static synchronized StringBuilder getErrorBuffer() {
         return new StringBuilder(errorBuffer.get());
     }
 
-    public static void checkForVerificationErrors()
-    {
+    public static void checkForVerificationErrors() {
 
         String verificationErrorString = WebDriverManager.getErrorBuffer().toString();
 
         //Fail test case if needed
-        if (!verificationErrorString.isEmpty())
-        {
+        if (!verificationErrorString.isEmpty()) {
             Assert.fail(verificationErrorString);
         }
 
     }
 
-    public static WebDriver get()
-    {
+    public static WebDriver get() {
         return webDriver.get();
     }
 
     public static synchronized void setBrowserDriver(CustomData.BrowserName browserName, String testName)
-            throws MalformedURLException
-    {
+            throws MalformedURLException {
         WebDriver driver;
-        if (Setup.runTime.equalsIgnoreCase("local"))
-        {
+        if (Setup.runTime.equalsIgnoreCase("local")) {
             Capabilities options = setBrowserOption(browserName);
             driver = setLocalBrowserDriver(browserName, options);
-        }
-        else
-        {
+        } else {
             DesiredCapabilities caps = setCapabilities(testName);
             driver = new RemoteWebDriver(new URL(Setup.saucelabsURL), caps);
         }
@@ -93,14 +83,12 @@ public class WebDriverManager
         webDriver.set(new EventFiringWebDriver(driver));
     }
 
-    private static DesiredCapabilities setCapabilities(String testName)
-    {
+    private static DesiredCapabilities setCapabilities(String testName) {
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("browserName", Setup.browserName.getBrowser());
         caps.setCapability("name", testName);
 
-        if (Setup.browserName == CustomData.BrowserName.SAFARI)
-        {
+        if (Setup.browserName == CustomData.BrowserName.SAFARI) {
             caps.setCapability("version", "10");
         }
 
@@ -108,39 +96,29 @@ public class WebDriverManager
     }
 
     private static WebDriver setLocalBrowserDriver(CustomData.BrowserName browserName,
-            Capabilities options)
-    {
-        if (Setup.os == CustomData.OS.WINDOWS)
-        {
+                                                   Capabilities options) {
+        if (Setup.os == CustomData.OS.WINDOWS) {
             return setLocalBrowserDriverOnWin(browserName, options);
-        }
-        else
-        {
+        } else {
             return setLocalBrowserDriverOnMac(browserName, options);
         }
     }
 
-    private static WebDriver setLocalBrowserDriverOnMac(CustomData.BrowserName browserName, Capabilities options)
-    {
+    private static WebDriver setLocalBrowserDriverOnMac(CustomData.BrowserName browserName, Capabilities options) {
         WebDriver driver;
-        if (browserName == CustomData.BrowserName.FIREFOX)
-        {
+        if (browserName == CustomData.BrowserName.FIREFOX) {
             System.setProperty("webdriver.gecko.driver", Setup.localMacFirefoxDriverPath);
-            driver = new FirefoxDriver((FirefoxOptions)options);
-        }
-        else
-        {
+            driver = new FirefoxDriver((FirefoxOptions) options);
+        } else {
             System.setProperty("webdriver.chrome.driver", Setup.localMacChromeDriverPath);
-            driver = new ChromeDriver((ChromeOptions)options);
+            driver = new ChromeDriver((ChromeOptions) options);
         }
 
         return driver;
     }
 
-    private static Capabilities setBrowserOption(CustomData.BrowserName browserName)
-    {
-        switch (browserName)
-        {
+    private static Capabilities setBrowserOption(CustomData.BrowserName browserName) {
+        switch (browserName) {
             case CHROME:
                 return setChromeOption();
 
@@ -148,7 +126,7 @@ public class WebDriverManager
                 String localAppDataDir = System.getenv("LOCALAPPDATA");
                 String edgeSideLoadPath = localAppDataDir
                         + "\\Packages\\Microsoft.MicrosoftEdge_8wekyb3d8bbwe\\LocalState\\BE";
-                String[] extPaths = new String[] {edgeSideLoadPath};
+                String[] extPaths = new String[]{edgeSideLoadPath};
 
                 EdgeOptions edgeOpts = new EdgeOptions();
                 edgeOpts.setCapability("extensionPaths", extPaths);
@@ -173,8 +151,7 @@ public class WebDriverManager
         }
     }
 
-    private static ChromeOptions setChromeOption()
-    {
+    private static ChromeOptions setChromeOption() {
         ChromeOptions chromeOpts = new ChromeOptions();
 
         chromeOpts.setPageLoadStrategy(PageLoadStrategy.NORMAL);
@@ -184,8 +161,7 @@ public class WebDriverManager
         return chromeOpts;
     }
 
-    private static FirefoxOptions setFirefoxOption()
-    {
+    private static FirefoxOptions setFirefoxOption() {
         FirefoxProfile firefoxProfile = new FirefoxProfile();
 
         firefoxProfile.setAcceptUntrustedCertificates(true);
@@ -204,44 +180,40 @@ public class WebDriverManager
     }
 
     private static WebDriver setLocalBrowserDriverOnWin(CustomData.BrowserName browserName,
-            Capabilities options)
-    {
+                                                        Capabilities options) {
         WebDriver driver;
-        switch (browserName)
-        {
+        switch (browserName) {
             case MSEDGE:
                 System.setProperty("webdriver.edge.driver", Setup.localMSEdgeDriverPath);
-                driver = new EdgeDriver((EdgeOptions)options);
+                driver = new EdgeDriver((EdgeOptions) options);
 
                 break;
             case FIREFOX:
                 System.setProperty("webdriver.gecko.driver", Setup.localWinFirefoxDriverPath);
-                driver = new FirefoxDriver((FirefoxOptions)options);
+                driver = new FirefoxDriver((FirefoxOptions) options);
 
                 break;
             case IE:
                 System.setProperty("webdriver.ie.driver", Setup.localIEDriverPath);
-                driver = new InternetExplorerDriver((InternetExplorerOptions)options);
+                driver = new InternetExplorerDriver((InternetExplorerOptions) options);
 
                 break;
             default:
                 System.setProperty("webdriver.chrome.driver", Setup.localWinChromeDriverPath);
-                driver = new ChromeDriver((ChromeOptions)options);
+                driver = new ChromeDriver((ChromeOptions) options);
                 break;
         }
 
         return driver;
     }
 
-    public static void updateTestResultToSauceLabs(boolean isPassed)
-    {
+    public static void updateTestResultToSauceLabs(boolean isPassed) {
         String result = "failed";
-        if (isPassed)
-        {
+        if (isPassed) {
             result = "passed";
         }
 
-        ((JavascriptExecutor)get()).executeScript("sauce:job-result=" + (result));
+        ((JavascriptExecutor) get()).executeScript("sauce:job-result=" + (result));
     }
 
 }
