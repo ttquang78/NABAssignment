@@ -1,4 +1,4 @@
-package com.pingone.automation.webportal.common;
+package com.ow.common;
 
 public class CustomData {
     public enum OS {

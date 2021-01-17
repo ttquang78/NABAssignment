@@ -1,4 +1,4 @@
-package com.pingone.automation.webportal.common;
+package com.ow.common;
 
 import java.util.HashMap;
 import java.util.Map;

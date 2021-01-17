@@ -3,7 +3,7 @@ package com.openweather;
 import com.myutils.automation.selenium.SelCmd;
 import com.myutils.automation.selenium.WebDriverManager;
 import com.myutils.automation.tools.ReportUtil;
-import com.pingone.automation.webportal.common.Setup;
+import com.ow.common.Setup;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;

@@ -1,7 +1,7 @@
 package com.myutils.automation.selenium;
 
-import com.pingone.automation.webportal.common.CustomData;
-import com.pingone.automation.webportal.common.Setup;
+import com.ow.common.CustomData;
+import com.ow.common.Setup;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
